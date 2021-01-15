@@ -1,11 +1,10 @@
-import Vue from "vue";
-import Vuex from "vuex";
+import VUE from 'vue'
+import VUEX from 'vuex'
 
-Vue.use(Vuex);
+VUE.use(VUEX)
 
-export default new Vuex.Store({
-  state: {
-    isPractice: false, //练习模式标志
+const state = {
+  isPractice: false, //练习模式标志
   flag: false, //菜单栏左右滑动标志
   userInfo: null,
   menu: [{
@@ -45,39 +44,33 @@ export default new Vuex.Store({
     //   content:[{item1:'模块操作',path:'/module'}],
     // }
   ],
-    isLoding: false, //搜索loding
-    isRouterAlive: true, //相同路由刷新组件
+}
+const mutations = {
+  practice(state,status) {
+    state.isPractice = status
   },
-  getters: {
-    // 查询搜索loding
-    getIsLoding: (state) => state.isLoding,
+  toggle(state) {
+    state.flag = !state.flag
   },
-  mutations: {
-    practice(state,status) {
-      state.isPractice = status
-    },
-    toggle(state) {
-      state.flag = !state.flag
-    },
-    changeUserInfo(state,info) {
-      state.userInfo = info
-    },
-    // 设置loding
-    setIsLoding(state, isLoding = false) {
-      state.isLoding = isLoding;
-    },
+  changeUserInfo(state,info) {
+    state.userInfo = info
+  }
+}
+const getters = {
+ 
+}
+const actions = {
+  getUserInfo(context,info) {
+    context.commit('changeUserInfo',info)
   },
-  actions: {
-    getUserInfo(context,info) {
-      context.commit('changeUserInfo',info)
-    },
-    getPractice(context,status) {
-      context.commit('practice',status)
-    },
-    // 相同路由刷新组件
-    setIsRouterAlive(context, data) {
-      context.commit("setIsRouterAlive", data);
-    },
-  },
-  modules: {}
-});
+  getPractice(context,status) {
+    context.commit('practice',status)
+  }
+}
+export default new VUEX.Store({
+  state,
+  mutations,
+  getters,
+  actions,
+  // store
+})

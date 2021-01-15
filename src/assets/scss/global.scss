@@ -1,0 +1,184 @@
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+
+  .activeInput {
+    // border-color: $active_color;
+    border: 2px solid $active_color;
+  }
+
+  ._border_input_active {
+    border-color: $active_color;
+  }
+
+  
+}
+
+
+body,
+td,
+th {
+  font-family: SourceHanSansCN-Regular, SourceHanSansCN;
+  font-size: 16px;
+  color: #000000;
+  font-weight: 300;
+}
+html,body{
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  overflow: hidden;
+  font-family: "Microsoft YaHei";
+  width: 100%;
+  height: 100%;
+}
+
+.btn_font {
+  font-size: 14px;
+  font-family: SourceHanSansCN-Normal, SourceHanSansCN;
+  font-weight: 400;
+  color: #fff;
+
+  ._icon {
+    font-size: 18px;
+  }
+}
+// 单行溢出显示省略号
+._one_omit {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+//多行溢出省略号
+._more_omit {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
+// 隐藏滚动条但可滚动
+._hideScrollbar {
+  overflow-y: scroll;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+  &::-webkit-scrollbar {
+    /* WebKit */
+    width: 0;
+    height: 0;
+  }
+}
+// 鼠标悬浮手型
+._cursor_pointer {
+  cursor: pointer;
+}
+.el-table--scrollable-x .el-table__body-wrapper {
+  // &::-webkit-scrollbar { /* WebKit */
+  //   position: fixed;
+  //   bottom: 20px; left: 20px;
+  // }
+}
+// 自定义文件上传
+._upload_file {
+  width: 100%;
+  height: 30px;
+  border-radius: 8px;
+  border: 1px dashed #8e7b7b;
+  display: inline-block;
+  line-height: 30px;
+  cursor: pointer;
+  text-align: center;
+  font-size: 18px;
+  font-family: SourceHanSansCN-Normal, SourceHanSansCN;
+  font-weight: 400;
+  color: rgba(126, 126, 126, 0.62);
+  ._icon {
+  }
+  ._upload_file_input {
+    position: absolute;
+    width: 100%;
+    opacity: 0;
+    height: 30px;
+    left: 0;
+    cursor: pointer;
+  }
+  ._relative_span {
+    margin-left: 6px;
+    font-size: 14px;
+    font-family: SourceHanSansCN-Normal, SourceHanSansCN;
+    font-weight: 400;
+    color: rgba(126, 126, 126, 0.62);
+  }
+}
+
+._header_search ._flex 
+
+._block{
+  &:first-child{
+    ._sele{
+      &:first-child{
+        .el-input__inner{
+          padding: 0 24px 0 40px;
+        }
+        ._rlt_text{
+          position: absolute;
+          left: 7px;
+          z-index: 2;
+          font-size: 12px;
+          top: 6px;
+          cursor: pointer;pointer-events: none;
+          font-family: SourceHanSansCN-Normal, SourceHanSansCN;
+          font-weight: 400;
+          color: #000000;
+        }
+      }
+    
+    }
+  }
+  
+}
+
+// @font-face {
+//   font-family: SourceHanSansCN-Bold;
+//   src: url("https://dazhonghua-xiaoyao.oss-cn-guangzhou.aliyuncs.com/dbchain_web/%E6%80%9D%E6%BA%90%E9%BB%91%E4%BD%93%20CN-Bold.otf");
+//   /* IE9 */
+// }
+
+// @font-face {
+//   font-family: SourceHanSansCN-ExtraLight;
+//   src: url("https://dazhonghua-xiaoyao.oss-cn-guangzhou.aliyuncs.com/dbchain_web/%E6%80%9D%E6%BA%90%E9%BB%91%E4%BD%93%20CN-ExtraLight.otf");
+//   /* IE9 */
+// }
+
+// @font-face {
+//   font-family: SourceHanSansCN-Heavy;
+//   src: url("https://dazhonghua-xiaoyao.oss-cn-guangzhou.aliyuncs.com/dbchain_web/%E6%80%9D%E6%BA%90%E9%BB%91%E4%BD%93%20CN-Heavy.otf");
+//   /* IE9 */
+// }
+
+@font-face {
+  font-family: SourceHanSansCN-Light;
+  src: url("https://dazhonghua-xiaoyao.oss-cn-guangzhou.aliyuncs.com/dbchain_web/%E6%80%9D%E6%BA%90%E9%BB%91%E4%BD%93%20CN-Light.otf");
+  /* IE9 */
+}
+
+@font-face {
+  font-family: SourceHanSansCN-Medium;
+  src: url("https://dazhonghua-xiaoyao.oss-cn-guangzhou.aliyuncs.com/dbchain_web/%E6%80%9D%E6%BA%90%E9%BB%91%E4%BD%93%20CN-Medium.otf");
+  /* IE9 */
+}
+
+@font-face {
+  font-family: SourceHanSansCN-Normal;
+  src: url("https://dazhonghua-xiaoyao.oss-cn-guangzhou.aliyuncs.com/dbchain_web/%E6%80%9D%E6%BA%90%E9%BB%91%E4%BD%93%20CN-Normal.otf");
+  /* IE9 */
+}
+
+@font-face {
+  font-family: SourceHanSansCN-Regular;
+  src: url("https://dazhonghua-xiaoyao.oss-cn-guangzhou.aliyuncs.com/dbchain_web/%E6%80%9D%E6%BA%90%E9%BB%91%E4%BD%93%20CN-Regular.otf");
+  /* IE9 */
+}

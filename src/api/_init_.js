@@ -1,13 +1,15 @@
-const prod_cdn = "https://static.sosoyoyo.com",
-  test_cdn = "http://static.test.sosoyoyo.com";
+const prod_AppCode = "CB8KVGZTXZ",
+	test_AppCode = "CB8KVGZTXZ";
 
-const prod_login = "http://login.sosoyoyo.com",
-  test_login = "http://login.test.sosoyoyo.com";
+const prod_BaseUrl = "http://192.168.3.85:3001/relay",
+	test_BaseUrl = "https://controlpanel.dbchain.cloud/relay";
 
+const prod_ChainId = "testnet",
+	test_ChainId = "testnet";
+
+	
 exports.APIURL = {
-  build: "https://sapi.sosoyoyo.com",
-  test: "http://sapi.test.sosoyoyo.com",
-  serve: "http://192.168.2.25:8000",
-  cdn: process.env.VUE_APP_FLAG === "pro" ? prod_cdn : test_cdn,
-  login: process.env.VUE_APP_FLAG === "pro" ? prod_login : test_login
+	AppCode:process.env.VUE_APP_FLAG === "pro" ? prod_AppCode : test_AppCode,
+	BaseUrl:process.env.VUE_APP_FLAG === "pro" ? prod_BaseUrl : test_BaseUrl,
+	ChainId:process.env.VUE_APP_FLAG === "pro" ? prod_ChainId : test_ChainId,
 };
