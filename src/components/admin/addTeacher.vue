@@ -3,26 +3,32 @@
   <section class="add">
     <el-form ref="form" :model="form" label-width="80px">
       <el-form-item label="姓名">
-            <el-input v-model="form.teacherName"></el-input>
-          </el-form-item>
-          <el-form-item label="学院">
-            <el-input v-model="form.institute"></el-input>
-          </el-form-item>
-          <el-form-item label="性别">
-            <el-input v-model="form.sex"></el-input>
-          </el-form-item>
-          <el-form-item label="电话号码">
-            <el-input v-model="form.tel"></el-input>
-          </el-form-item>
-          <el-form-item label="密码">
-            <el-input v-model="form.pwd"></el-input>
-          </el-form-item>
-          <el-form-item label="身份证号">
-            <el-input v-model="form.cardId"></el-input>
-          </el-form-item>
-          <el-form-item label="职称">
-            <el-input v-model="form.type"></el-input>
-          </el-form-item>
+        <el-input v-model="form.teacher_name"></el-input>
+      </el-form-item>
+      <el-form-item label="学院">
+        <el-input v-model="form.institute"></el-input>
+      </el-form-item>
+      <el-form-item label="性别">
+        <el-input v-model="form.sex"></el-input>
+      </el-form-item>
+      <el-form-item label="电话号码">
+        <el-input v-model="form.tel"></el-input>
+      </el-form-item>
+      <el-form-item label="邮箱">
+        <el-input v-model="form.email"></el-input>
+      </el-form-item>
+      <el-form-item label="密码">
+        <el-input v-model="form.pwd"></el-input>
+      </el-form-item>
+      <el-form-item label="身份证号">
+        <el-input v-model="form.cardId"></el-input>
+      </el-form-item>
+      <el-form-item label="职称">
+        <el-input v-model="form.type"></el-input>
+      </el-form-item>
+      <el-form-item label="库链地址">
+        <el-input v-model="form.address"></el-input>
+      </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="onSubmit()">立即创建</el-button>
         <el-button type="text" @click="cancel()">取消</el-button>
@@ -35,7 +41,8 @@
 export default {
   data() {
     return {
-      form: { //表单数据初始化
+      form: {
+        //表单数据初始化
         studentName: null,
         grade: null,
         major: null,
@@ -46,33 +53,34 @@ export default {
         pwd: null,
         cardId: null,
         sex: null,
-        role: 2
-      }
+        role: 2,
+      },
     };
   },
   methods: {
-    onSubmit() { //数据提交
+    onSubmit() {
+      //数据提交
       this.$axios({
-        url: '/api/teacher',
-        method: 'post',
+        url: "/api/teacher",
+        method: "post",
         data: {
-          ...this.form
-        }
-      }).then(res => {
-        if(res.data.code == 200) {
+          ...this.form,
+        },
+      }).then((res) => {
+        if (res.data.code == 200) {
           this.$message({
-            message: '数据添加成功',
-            type: 'success'
-          })
-          this.$router.push({path: '/teacherManage'})
+            message: "数据添加成功",
+            type: "success",
+          });
+          this.$router.push({ path: "/teacherManage" });
         }
-      })
+      });
     },
-    cancel() { //取消按钮
-      this.form = {}
+    cancel() {
+      //取消按钮
+      this.form = {};
     },
-    
-  }
+  },
 };
 </script>
 <style lang="scss" scoped>
