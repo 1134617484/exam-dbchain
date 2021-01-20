@@ -34,6 +34,10 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 老师3  "train brick gift solid galaxy planet detail seat barely hire lady render"  ["U2FsdGVkX1+GKta8QyGXjfsYfXOqDmFxyiyetnsgpqGuCS4P3MLRt7zmFX9X/A5n84cGSJKS7irQr2+XRVjXaKYxnzP9TwQlOEqvzLX2g2Iz92IJDDhvDyc9SPCChXRw","023f18138f175422a78c73f3c6b891f08f01aa117d4084d7e34acdd2c453c9c808","cosmos1cgpqhzedhz7smqjc73as5v3jf3vung07azmzc0"]
 
+citizen nice machine pioneer gossip lyrics tomato spray light food ethics throw  
+["U2FsdGVkX1/ofCcNGqY0KawJP+v4fDQeWm3J1CMPSQfp1B5p9dIkZmPi/nffI8I4Fm87Qqt8b+edPo6oqGzkP7DucpDjg0ItrX3hF9YG/fJNBhW+PO6GlLCiVTkzAQ8w","02e8421ae02788877fb7812bdf6d6103f7e02c495533a09f4ce8711dc9311431d4","cosmos1xlkrjmy0xdlthdn9uug3wxesmwwpdan6fekw8g"]
+
+
 
 学生1：
 "fuel lamp canal lazy barrel medal scheme coconut brass slender tackle satoshi" ["U2FsdGVkX18l/K9wK2PikSRNUdauXIWRKvFaLiZED5cR8PefA88ePp+BkpKCtgKPSsgZcmcBVAa7Xp/vel+kR7lMvNU9S3+un4TnixdTsVDN3GpudJQXSszRh/o33OqE","036e227ba9ea5f210bbd8cdf2512a01cf135a37b4332474727f04bee1b8b58506b","cosmos15za2ksxwvh9jwhsh0rep2965fkc755epz5xfer"]

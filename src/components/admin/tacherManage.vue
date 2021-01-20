@@ -10,6 +10,7 @@
       <el-table-column prop="tel" label="联系方式" width="120"></el-table-column>
       <el-table-column prop="email" label="密码" width="120"></el-table-column>
       <el-table-column prop="card_id" label="身份证号" width="120"></el-table-column>
+       <el-table-column prop="address" label="库链地址" width="120"></el-table-column>
       <el-table-column prop="type" label="职称" width="120"></el-table-column>
       <el-table-column fixed="right" label="操作" width="150">
         <template slot-scope="scope">
@@ -37,7 +38,7 @@
       <section class="update">
         <el-form ref="form" :model="form" label-width="80px">
           <el-form-item label="姓名">
-            <el-input v-model="form.teacherName"></el-input>
+            <el-input v-model="form.teacher_name"></el-input>
           </el-form-item>
           <el-form-item label="学院">
             <el-input v-model="form.institute"></el-input>
@@ -52,7 +53,7 @@
             <el-input v-model="form.pwd"></el-input>
           </el-form-item>
           <el-form-item label="身份证号">
-            <el-input v-model="form.cardId"></el-input>
+            <el-input v-model="form.card_id"></el-input>
           </el-form-item>
           <el-form-item label="职称">
             <el-input v-model="form.type"></el-input>
@@ -138,7 +139,7 @@ export default {
         cancelButtonText: '算了,留着吧',
         type: 'danger'
       }).then(()=> { //确认删除
-      this.insertRow(data, "student", "学生删除成功");
+      this.insertRow(data, "teacher", "教师删除成功");
         // this.$axios({
         //   url: `${this.API}/api/teacher/${teacherId}`,
         //   method: 'delete',
@@ -153,7 +154,7 @@ export default {
       this.dialogVisible = false;
       let data={...this.form,...{status:"1"}};
       console.log(data)
-      this.insertRow(data, "student", "学生信息编辑成功");
+      this.insertRow(data, "teacher", "学生信息编辑成功");
       // this.$axios({
       //   url: '/api/teacher',
       //   method: 'put',

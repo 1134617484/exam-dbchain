@@ -4,7 +4,7 @@
     <el-table :data="pagination.records" border>
       <el-table-column
         fixed="left"
-        prop="studentName"
+        prop="student_name"
         label="姓名"
         width="180"
       ></el-table-column>

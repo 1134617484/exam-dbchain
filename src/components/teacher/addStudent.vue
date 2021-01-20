@@ -90,7 +90,7 @@ export default {
         pwd: null,
         card_id: null,
         sex: null,
-        role: 2,
+        role: "2",
         address:null,
         teacher_id:null
       },

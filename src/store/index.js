@@ -51,6 +51,8 @@ export default new Vuex.Store({
   getters: {
     // 查询搜索loding
     getIsLoding: (state) => state.isLoding,
+    // 考试模式还是练习模式
+    getIsPractice:(state)=>state.isPractice
   },
   mutations: {
     practice(state,status) {

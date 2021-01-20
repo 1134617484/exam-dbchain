@@ -10,12 +10,12 @@
       </ul>
       <ul class="paper" v-loading="loading">
         <li class="item" v-for="(item,index) in pagination.records" :key="index">
-          <h4 @click="toExamMsg(item.examCode)">{{item.source}}</h4>
+          <h4 @click="toExamMsg(item)">{{item.source}}</h4>
           <p class="name">{{item.source}}-{{item.description}}</p>
           <div class="info">
-            <i class="el-icon-loading"></i><span>{{item.examDate.substr(0,10)}}</span>
-            <i class="iconfont icon-icon-time"></i><span v-if="item.totalTime != null">限时{{item.totalTime}}分钟</span>
-            <i class="iconfont icon-fenshu"></i><span>满分{{item.totalScore}}分</span>
+            <i class="el-icon-loading"></i><span>{{item.exam_date}}</span>
+            <i class="iconfont icon-icon-time"></i><span v-if="item.total_time != null">限时{{item.total_time}}分钟</span>
+            <i class="iconfont icon-fenshu"></i><span>满分{{item.total_soure}}分</span>
           </div>
         </li>
       </ul>
@@ -62,22 +62,31 @@ export default {
     async getExamInfo() {
       // 先获取当前用户的地址
       let address=this.$DBChain.getAddress();
-      // 根据用户地址获取当前用户在数据库的id  调用reserse()倒序以保证拿到最后（最新）一条数据
-      let studentAll=await this.$DBChain.Querier(this.appCode).student.equal('address',address).val().reverse();
+      // 根据用户地址获取当前用户在数据库的id  调用reverse()倒序以保证拿到最后（最新）一条数据
+      let studentAll=await this.$DBChain.Querier(this.appCode).student.equal('address',address).val();
+      studentAll.reverse();
       if(!studentAll[0])return this.$message.error('当前用户在数据表中不存在')
       console.log(studentAll)
+      // 获取我的老师，然后再去试卷表找到该老师创建的所有考卷
+      let teacherAll=await this.$DBChain.Querier(this.appCode).teacher.equal('id',studentAll[0].teacher_id).val();
+      teacherAll.reverse();
+      console.log(teacherAll)
+      if(!teacherAll[0])return this.$message.error('当前用户的老师在数据表中不存在')
       // 再找到对应的试题题目
-      let scoreAll=await this.$DBChain.Querier(this.appCode).score.equal('student_id',studentAll[0].id).val();
-      console.log(scoreAll)
+      let examManageAll=await this.$DBChain.Querier(this.appCode).exam_manage.equal('created_by',teacherAll[0].address).val();
+      console.log(examManageAll)
+      this.pagination.records=examManageAll;
+      this.loading = false
+      this.$forceUpdate();
       // 
 
-      this.$axios(`${this.API}/api/exams/${this.pagination.current}/${this.pagination.size}`).then(res => {
-        this.pagination = res.data.data
-        this.loading = false
-        console.log(this.pagination)
-      }).catch(error => {
-        console.log(error)
-      })
+      // this.$axios(`${this.API}/api/exams/${this.pagination.current}/${this.pagination.size}`).then(res => {
+      //   this.pagination = res.data.data
+      //   this.loading = false
+      //   console.log(this.pagination)
+      // }).catch(error => {
+      //   console.log(error)
+      // })
     },
     //改变当前记录条数
     handleSizeChange(val) {
@@ -91,20 +100,20 @@ export default {
     },
     //搜索试卷
     search() {
-      this.$axios('/api/exams').then(res => {
-        if(res.data.code == 200) {
-          let allExam = res.data.data
-          let newPage = allExam.filter(item => {
-            return item.source.includes(this.key)
-          })
-          this.pagination.records = newPage
-        }
-      })
+      // this.$axios('/api/exams').then(res => {
+      //   if(res.data.code == 200) {
+      //     let allExam = res.data.data
+      //     let newPage = allExam.filter(item => {
+      //       return item.source.includes(this.key)
+      //     })
+      //     this.pagination.records = newPage
+      //   }
+      // })
     },
     //跳转到试卷详情页
-    toExamMsg(examCode) {
-      this.$router.push({path: '/examMsg', query: {examCode: examCode}})
-      console.log(examCode)
+    toExamMsg(item) {
+      this.$router.push({path: '/examMsg', query: {paper_id: item.paper_id}})
+      console.log(item.paper_id)
     }
   },
   computed:{
