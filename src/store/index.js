@@ -80,6 +80,10 @@ export default new Vuex.Store({
     setIsRouterAlive(context, data) {
       context.commit("setIsRouterAlive", data);
     },
+    setIsLoding(context,data) {
+      context.commit("setIsLoding", data);
+    },
+    
   },
   modules: {}
 });

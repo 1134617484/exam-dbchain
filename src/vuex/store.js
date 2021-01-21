@@ -4,6 +4,7 @@ import VUEX from 'vuex'
 VUE.use(VUEX)
 
 const state = {
+  
   isPractice: false, //练习模式标志
   flag: false, //菜单栏左右滑动标志
   userInfo: null,
@@ -67,10 +68,10 @@ const actions = {
     context.commit('practice',status)
   }
 }
-export default new VUEX.Store({
-  state,
-  mutations,
-  getters,
-  actions,
-  // store
-})
+// export default new VUEX.Store({
+//   state,
+//   mutations,
+//   getters,
+//   actions,
+//   // store
+// })
