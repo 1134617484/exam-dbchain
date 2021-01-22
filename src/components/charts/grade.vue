@@ -22,17 +22,21 @@ export default {
     this.score();
   },
   methods: {
-    score() {
-      let studentId = this.$route.query.studentId
-      this.$axios(`${this.API}/api/score/${studentId}`).then(res => { //根据学生Id查询成绩
-        console.log(res)
-        if(res.data.code == 200) {
-          let rootData = res.data.data
-          rootData.forEach((element,index) => {
+    async score() {
+      let studentId = this.$route.query.studentId;
+
+       let scoreAll=await this.$DBChain.Querier(this.appCode).score
+       .equal('student_id',studentId).val();
+       console.log(scoreAll)
+       scoreAll.forEach((element,index) => {
             this.tableDataX.push(`第${index + 1}次`)
-            this.tableDataY.push(element.etScore)
+            this.tableDataY.push(element.score)
           });
+
           let boxDom = this.$refs["box"];
+          console.log(boxDom)
+          console.log(this)
+          
           let scoreCharts = this.$echarts.init(boxDom);
           let option = {
             xAxis: {
@@ -54,12 +58,14 @@ export default {
           scoreCharts.on("mouseover", params => {
             console.log(params.value);
           });
-        }else {
-          this.isNull = true
-        }
-      })
+
     }
-  }
+  },
+  computed: {
+    appCode() {
+      return this.$APIURL.AppCode;
+    },
+  },
 };
 </script>
 

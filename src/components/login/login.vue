@@ -110,7 +110,6 @@ export default {
       setChainId(this.$APIURL.ChainId);
       // 关闭loding
       this.$store.commit("setIsLoding", false);
-
       return true;
     },
     // 点击登入
@@ -123,15 +122,71 @@ export default {
           }
           this.$store.commit("setIsLoding", true);
           // 此处生成对应私钥
-          let iskey = this.createKey();
+          let iskey =await this.createKey();
           console.log(iskey);
-          if (iskey) return this.$router.push("/home");
+          if (iskey) return this.getRouter();
           return this.$message.error("创建私钥或设置节点信息失败");
         } else {
           console.log("error submit!!");
           return false;
         }
       });
+    },
+    async getRouter(address=this.$DBChain.getAddress()) {
+      this.$store.commit("setIsLoding", true);
+      console.log(address)
+      // 先在学生表中查看
+      let studentAll =await this.$DBChain
+        .Querier(this.appCode)
+        .student.compareAll([
+          ["address", address],
+          ["status", "1"],
+        ])
+        .val();
+      console.log(studentAll);
+      studentAll.reverse();
+      console.log(studentAll)
+      if(studentAll.length>0){
+        this.$store.commit('setUserType','2')
+        this.$store.commit("setIsLoding", false);
+        this.$store.commit('changeUserInfo',studentAll[0])
+        return this.$router.push('/student')
+        }
+      let teacherAll =await this.$DBChain
+        .Querier(this.appCode)
+        .teacher.compareAll([
+          ["address", address],
+          ["status", "1"],
+        ])
+        .val();
+      console.log(teacherAll);
+      teacherAll.reverse();
+      if(teacherAll.length>0){
+        this.$store.commit('setUserType','1')
+        this.$store.commit("setIsLoding", false);
+        this.$store.commit('changeUserInfo',teacherAll[0])
+        return this.$router.push('/index')
+        }
+      let adminAll =await this.$DBChain
+        .Querier(this.appCode)
+        .admin.compareAll([
+          ["address", address],
+          ["status", "1"],
+        ])
+        .val();
+      console.log(adminAll);
+      adminAll.reverse();
+      if(adminAll.length>0){
+        this.$store.commit('setUserType','0')
+        this.$store.commit("setIsLoding", false);
+        this.$store.commit('changeUserInfo',adminAll[0])
+        return this.$router.push('/index')
+        }
+    },
+  },
+  computed: {
+    appCode() {
+      return this.$APIURL.AppCode;
     },
   },
 };

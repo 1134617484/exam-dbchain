@@ -254,6 +254,7 @@
 let that;
 import store from "@/vuex/store";
 import { mapState } from "vuex";
+
 import {similar} from "@/utils/mUtils"
 export default {
   store,
@@ -414,14 +415,6 @@ judgeAnswerMap:['T','F'],
         console.log(this.topic[name]);
         this.topicCount[Number(type) - 1]++;
         this.score[Number(type) - 1] += Number(question[0].score);
-        // let len = this.topicCount[Number(type) - 1];
-
-        // let father = [];
-        // for (let i = 0; i < len; i++) {
-        //   //根据填空题数量创建二维空数组存放每道题答案
-        //   let children = [null, null, null, null];
-        //   father.push( [null, null, null, null]);
-        // }
 
         if (i == paperManageAll.length - 1) {
           console.log(this.topic, this.topicCount);
@@ -445,38 +438,6 @@ judgeAnswerMap:['T','F'],
         }
       }
 
-      // this.$axios(`${this.API}/api/exam/${examCode}`).then(res => {  //通过examCode请求试卷详细信息
-      //   this.examData = { ...res.data.data} //获取考试详情
-      //   this.index = 0
-      //   this.time = this.examData.totalScore //获取分钟数
-      //   let paperId = this.examData.paperId
-      //   this.$axios(`${this.API}/api/paper/${paperId}`).then(res => {  //通过paperId获取试题题目信息
-      //     this.topic = {...res.data}
-      //     let reduceAnswer = this.topic[1][this.index]
-      //     this.reduceAnswer = reduceAnswer
-      //     let keys = Object.keys(this.topic) //对象转数组
-      //     keys.forEach(e => {
-      //       let data = this.topic[e]
-      //       this.topicCount.push(data.length)
-      //       let currentScore = 0
-      //       for(let i = 0; i< data.length; i++) { //循环每种题型,计算出总分
-      //         currentScore += data[i].score
-      //       }
-      //       this.score.push(currentScore) //把每种题型总分存入score
-      //     })
-      //     let len = this.topicCount[1]
-      //     let father = []
-      //     for(let i = 0; i < len; i++) { //根据填空题数量创建二维空数组存放每道题答案
-      //       let children = [null,null,null,null]
-      //       father.push(children)
-      //     }
-      //     this.fillAnswer = father
-      //     let dataInit = this.topic[1]
-      //     this.number = 1
-      //     this.showQuestion = dataInit[0].question
-      //     this.showAnswer = dataInit[0]
-      //   })
-      // })
     },
     getShowAnswer(type = this.currentType, index = this.index) {
       let name =
@@ -704,9 +665,7 @@ console.log(Object.keys(this.AnswerAll))
     appCode() {
       return this.$APIURL.AppCode;
     },
-    isPractice() {
-      return this.$store.getters.getIsPractice;
-    },
+    ...mapState(["isPractice",'userType']),
   },
 };
 </script>

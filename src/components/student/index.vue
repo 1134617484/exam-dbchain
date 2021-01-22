@@ -11,7 +11,7 @@
           <li><router-link to="/message">给我留言</router-link></li>
           <li><a href="javascript:;">待定</a></li>
           <li class="right" @mouseenter="flag = !flag" @mouseleave="flag = !flag">
-            <a href="javascript:;"><i class="iconfont icon-Userselect icon"></i>{{user.userName}}</a>
+            <a href="javascript:;"><i class="iconfont icon-Userselect icon"></i>{{userInfo.student_name}}</a>
             <div class="msg" v-if="flag">
               <p @click="manage()">管理中心</p>
               <p class="exit" @click="exit()">退出</p>
@@ -40,28 +40,37 @@ export default {
   data() {
     return {
       flag: false,
-      user: {}
+      userInfo: {}
     }
   },
   created() {
-    this.userInfo()
+    this.getUserInfo()
   },
   methods: {
     exit() {  //退出登录
-      this.$router.push({path:"/"}) //跳转到登录页面
-      this.$cookies.remove("cname") //清除cookie
-      this.$cookies.remove("cid")
+      this.$router.push({path:"/login"}) //跳转到登录页面
+     
     },
     manage() {  //跳转到修改密码页面
       this.$router.push({path: '/manager'})
     },
-    userInfo() {
-      let studentName = this.$cookies.get("cname")
-      let studentId = this.$cookies.get("cid")
-      console.log(`studentId${studentId}`)
-      console.log(`studentName ${studentName}`)
-      this.user.userName = studentName
-      this.user.studentId = studentId
+    async getUserInfo() {
+      let address = this.$DBChain.getAddress();
+      console.log(address);
+      // 多条件查询 查询当前且可用的学生，若多个学生符合，则取最后一条，
+      //基于区块链特性，数据不可删除，故，若该生冻结解冻多次，或该系统中并未设计去重，因此可能会产生符合条件的多条数据
+      let user = await this.$DBChain
+        .Querier(this.appCode)
+        .student.compareAll([
+          ["address", address],
+          ["status", "1"],
+        ])
+        .val();
+
+      user.reverse();
+      console.log(user);
+      if (!user[0]) return this.$message.error("暂未找到该学生，请联系其老师");
+      this.userInfo = user[0];
     },
     practice() { //跳转练习模式
       let isPractice = true
@@ -74,7 +83,14 @@ export default {
       this.$router.push({path:'/student'})
     }
   },
-  computed:mapState(["isPractice"])
+  computed: {
+    appCode() {
+      return this.$APIURL.AppCode;
+    },
+    isPractice() {
+      return this.$store.getters.getIsPractice;
+    },
+  },
 }
 </script>
 

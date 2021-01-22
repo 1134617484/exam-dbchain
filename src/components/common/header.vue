@@ -9,14 +9,21 @@
       <el-col :span="20" class="topbar-right">
         <i class="el-icon-menu" @click="toggle()"></i>
         <div class="user">
-          <span>{{user.userName}}</span>
-          <img src="@/assets/img/userimg.png" class="user-img" ref="img" @click="showSetting()" />
+          <span>{{ userType=='0'?user.admin_name:userType=='1'?user.teacher_name:user.student_name }}</span>
+          <img
+            src="@/assets/img/userimg.png"
+            class="user-img"
+            ref="img"
+            @click="showSetting()"
+          />
           <transition name="fade">
             <div class="out" ref="out" v-show="login_flag">
               <ul>
                 <li><a href="javascript:;">用户信息</a></li>
                 <li><a href="javascript:;">设置</a></li>
-                <li class="exit" @click="exit()"><a href="javascript:;">退出登录</a></li>
+                <li class="exit" @click="exit()">
+                  <a href="javascript:;">退出登录</a>
+                </li>
               </ul>
             </div>
           </transition>
@@ -27,56 +34,109 @@
 </template>
 
 <script>
-import store from '@/vuex/store'
-import {mapState,mapMutations} from 'vuex'
+import store from "@/vuex/store";
+import { mapState, mapMutations } from "vuex";
 export default {
   data() {
     return {
       login_flag: false,
-      user: { //用户信息
+      user: {
+        //用户信息
         userName: null,
-        userId: null
-      } 
-    }
+        userId: null,
+      },
+    };
   },
   created() {
-    this.getUserInfo()
+    this.getRouter();
   },
-  computed: mapState(["flag","menu"]),
+  computed: {
+    appCode() {
+      return this.$APIURL.AppCode;
+    },
+    isPractice() {
+      return this.$store.getters.getIsPractice;
+    },
+    ...mapState(["flag", "menu", "userInfo",'userType']),
+  },
   methods: {
     //显示、隐藏退出按钮
     showSetting() {
-      this.login_flag = !this.login_flag
+      this.login_flag = !this.login_flag;
+    },
+    async getRouter(address = this.$DBChain.getAddress()) {
+      this.$store.commit("setIsLoding", true);
+      console.log(address);
+      // 先在学生表中查看
+      let studentAll = await this.$DBChain
+        .Querier(this.appCode)
+        .student.compareAll([
+          ["address", address],
+          ["status", "1"],
+        ])
+        .val();
+      console.log(studentAll);
+      studentAll.reverse();
+      console.log(studentAll);
+      if (studentAll.length > 0) {
+        this.$store.commit("setUserType", "2");
+        this.$store.commit("setIsLoding", false);
+        this.$store.commit("changeUserInfo", studentAll[0]);
+        this.$router.push('/student')
+        return (this.user = studentAll[0]);
+      }
+      let teacherAll = await this.$DBChain
+        .Querier(this.appCode)
+        .teacher.compareAll([
+          ["address", address],
+          ["status", "1"],
+        ])
+        .val();
+      console.log(teacherAll);
+      teacherAll.reverse();
+      if (teacherAll.length > 0) {
+        this.$store.commit("setUserType", "1");
+        this.$store.commit("setIsLoding", false);
+        this.$store.commit("changeUserInfo", teacherAll[0]);
+        return (this.user = teacherAll[0]);
+      }
+      let adminAll = await this.$DBChain
+        .Querier(this.appCode)
+        .admin.compareAll([
+          ["address", address],
+          ["status", "1"],
+        ])
+        .val();
+      console.log(adminAll);
+      adminAll.reverse();
+      if (adminAll.length > 0) {
+        this.$store.commit("setUserType", "0");
+        this.$store.commit("setIsLoding", false);
+        this.$store.commit("changeUserInfo", adminAll[0]);
+        return (this.user = adminAll[0]);
+      }
     },
     //左侧栏放大缩小
     ...mapMutations(["toggle"]),
-    getUserInfo() { //获取用户信息
-      let userName = this.$cookies.get("cname")
-      let userId = this.$cookies.get("cid")
-      this.user.userName = userName
-      this.user.userId = userId
-    },
+
     index() {
-      this.$router.push({path: '/index'})
+      this.$router.push({ path: "/index" });
     },
     exit() {
-      let role = this.$cookies.get("role")
-      this.$router.push({path:"/"}) //跳转到登录页面
-      this.$cookies.remove("cname") //清除cookie
-      this.$cookies.remove("cid")
-      this.$cookies.remove("role")
-      if(role == 0) {
-        this.menu.pop()
+      this.$router.push({ path: "/login" }); //跳转到登录页面
+      if (role == 0) {
+        this.menu.pop();
       }
-    }
+    },
   },
-  store
-}
+  store,
+};
 </script>
 
 <style scoped>
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .5s;
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
 }
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;

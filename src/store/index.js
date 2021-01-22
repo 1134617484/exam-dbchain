@@ -47,12 +47,16 @@ export default new Vuex.Store({
   ],
     isLoding: false, //搜索loding
     isRouterAlive: true, //相同路由刷新组件
+    userType:'2',//当前登入用户身份（0，超管；1：老师 2：学生）
+
   },
   getters: {
     // 查询搜索loding
     getIsLoding: (state) => state.isLoding,
     // 考试模式还是练习模式
-    getIsPractice:(state)=>state.isPractice
+    getIsPractice:(state)=>state.isPractice,
+    // 获取用户身份
+    getUserType:(state)=>state.userType,
   },
   mutations: {
     practice(state,status) {
@@ -68,6 +72,10 @@ export default new Vuex.Store({
     setIsLoding(state, isLoding = false) {
       state.isLoding = isLoding;
     },
+    // 设置用户身份
+    setUserType(state,userType=false){
+      state.userType = userType
+    }
   },
   actions: {
     getUserInfo(context,info) {

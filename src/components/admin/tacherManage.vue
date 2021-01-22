@@ -91,6 +91,7 @@ export default {
   },
   methods: {
     async getTeacherInfo() {
+      //       // 先查出所有教师，然后先地址去重以减少数组，后去遍历所有教师取出当前库链地址下最后一条数据
       let studentAll = await this.$DBChain
         .Querier(this.appCode)
         ["teacher"].equal('status','1').val();
@@ -100,7 +101,7 @@ export default {
       // this.pagination.records=studentAll;
       this.tableDataAll = studentAll;
       this.pagination.total = studentAll.length;
-      this.changeTablePage(this.pagination.current, this.pagination.size);
+         
       //分页查询所有试卷信息
       // this.$axios(`${this.API}/api/teachers/${this.pagination.current}/${this.pagination.size}`).then(res => {
       //   this.pagination = res.data.data;
@@ -221,6 +222,7 @@ export default {
     appCode() {
       return this.$APIURL.AppCode;
     },
+    
   },
 };
 </script>

@@ -7,14 +7,14 @@
       <el-table-column prop="institute" label="所属学院" width="120"></el-table-column>
       <el-table-column prop="major" label="所属专业" width="200"></el-table-column>
       <el-table-column prop="grade" label="年级" width="100"></el-table-column>
-      <el-table-column prop="examDate" label="考试日期" width="120"></el-table-column>
-      <el-table-column prop="totalTime" label="持续时间" width="120"></el-table-column>
-      <el-table-column prop="totalScore" label="总分" width="120"></el-table-column>
+      <el-table-column prop="exam_date" label="考试日期" width="120"></el-table-column>
+      <el-table-column prop="total_time" label="持续时间" width="120"></el-table-column>
+      <el-table-column prop="total_soure" label="总分" width="120"></el-table-column>
       <el-table-column prop="type" label="试卷类型" width="120"></el-table-column>
       <el-table-column prop="tips" label="考生提示" width="400"></el-table-column>
       <el-table-column fixed="right" label="操作" width="150">
         <template slot-scope="scope">
-          <el-button @click="toPart(scope.row.examCode,scope.row.source)" type="primary" size="small">查看分段</el-button>
+          <el-button @click="toPart(scope.row)" type="primary" size="small">查看分段</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -31,6 +31,8 @@
 </template>
 
 <script>
+import { ArrdeWeight } from "@/utils/mUtils";
+import {mapState} from 'vuex'
 export default {
   data() {
     return {
@@ -47,11 +49,37 @@ export default {
     this.getExamInfo()
   },
   methods: {
-    getExamInfo() { //分页查询所有试卷信息
-      this.$axios(`${this.API}/api/exams/${this.pagination.current}/${this.pagination.size}`).then(res => {
-        this.pagination = res.data.data
-      }).catch(error => {
-      })
+    async getExamInfo() { //分页查询所有试卷信息
+    //分页查询所有试卷信息
+
+      // 先获取当前用户的地址
+      let address = this.$DBChain.getAddress();
+      let data = [];
+      if (this.userType == "0") {
+        data = await this.$DBChain.Querier(this.appCode)["exam_manage"].val();
+      } else {
+        data = await this.$DBChain
+          .Querier(this.appCode)
+          ["exam_manage"].compareAll([["created_by", address]])
+          .val();
+      }
+
+      console.log([...data]);
+      data.reverse();
+      data = ArrdeWeight(data, "paper_id");
+      console.log([...data]);
+      data = data.filter((res) => {
+        return res.status !== "0" && res.paper_id;
+      });
+      console.log([...data]);
+
+      console.log(data);
+      this.pagination.records = data;
+      this.$forceUpdate();
+      // this.$axios(`${this.API}/api/exams/${this.pagination.current}/${this.pagination.size}`).then(res => {
+      //   this.pagination = res.data.data
+      // }).catch(error => {
+      // })
     },
     //改变当前记录条数
     handleSizeChange(val) {
@@ -63,9 +91,15 @@ export default {
       this.pagination.current = val
       this.getExamInfo()
     },
-    toPart(examCode,source) { //跳转到分段charts页面
-      this.$router.push({path: '/scorePart', query:{examCode: examCode, source: source}})
+    toPart(row) { //跳转到分段charts页面
+      this.$router.push({path: '/scorePart', query:{examCode: row.id, source: row.source}})
     }
+  },
+  computed: {
+    appCode() {
+      return this.$APIURL.AppCode;
+    },
+    ...mapState(["userType"]),
   },
 };
 </script>

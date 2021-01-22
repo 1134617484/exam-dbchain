@@ -28,6 +28,10 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 2.使用npm install dbchain-js-client 安装dbchain前端依赖
 3.去DBChain首页记录下必要的几个参数，详情见下图
 
+管理员：bind dizzy trigger story senior session finger analyst text traffic scheme parent
+["U2FsdGVkX1+BTt8gkcrdI7M6UbuPC8V3yVZB8ML1vYeP96IalQcevUStb1a6am427MN+UQ8ShP7QXqfMaU2HQf14LI1Q9DOXjXeCgVbAQjXXqBAMTIe5B4QyEFHV3qNi","02b7bbe771f783285b5bab7d35dc0100d0e59da5d6c9a245106261e7a8d108ac86","cosmos19nkq2czvpf9lxde9xlc0v8cqpquqnkryzgfclp"]
+
+
 老师1：spatial sort lesson reunion stage liquid shiver cup type topic kid teach ["U2FsdGVkX1/nzjzNRp0hXDGzZ0shzIkseVRifzf8Sbt8Rq34O6sSxrLc9dlXzXYDUG3XgTvGXFmaJ+ff/irErQHiKLG2wlnThKUpAqwiNmZwzRFMfT6QRh8uze7CXcDc","03b489b1a6844f70c4141e5919616a6deba7964419f06f7373e7923f054b5c9942","cosmos1d6dq7hzp36dj2nh2mkmke6u53r9xg3d985tvk4"]
 
 老师2：sugar blossom truth power grace leaf core erode fat cube unfair write  ["U2FsdGVkX19gsq2jKauAo9qpmd8gV4vN9S0p94xoWZb6xwuEceyGHw/vI92v9UHHjhulKZ0raKtYTlvEtgVmeyyqzV1O72+1rYY9WJNQ6FoKuTwJSg2W7QPrTQ8Py2NL","031f45159dce8c9a13d9c98eba86425be5ca2828d6db7293a6f8c86a05311c482e","cosmos1kqhul4jrw04nzmag7apmhqmlfvx03hf59rzuzl"]  353343a

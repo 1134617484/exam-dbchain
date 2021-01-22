@@ -38,9 +38,10 @@ export default {
       
     }
   },
-  computed: mapState(["flag","menu"]),
+
   created() {
-    this.addData()
+    //  this.addData()
+    this.getRouter()
   },
   methods: {
     handleOpen(key, keyPath) {
@@ -53,9 +54,10 @@ export default {
     handleTitle(index) {
       // this.bus.$emit('sendIndex',index)
     },
-    addData() {
-      let role = this.$cookies.get("role")
-      if(role == 0) {
+    addData(type) {
+      let role = this.userType;
+      console.log(role)
+      if(role == '0') {
         this.menu.push({
           index: '5',
           title: '教师管理',
@@ -63,9 +65,60 @@ export default {
           content:[{item1:'教师管理',path:'/teacherManage'},{item2: '添加教师',path: '/addTeacher'}],
         })
       }
-    }
+    },
+    async getRouter(address=this.$DBChain.getAddress()) {
+      this.$store.commit("setIsLoding", true);
+      console.log(address)
+      // 先在学生表中查看
+      let studentAll =await this.$DBChain
+        .Querier(this.appCode)
+        .student.compareAll([
+          ["address", address],
+          ["status", "1"],
+        ])
+        .val();
+      console.log(studentAll);
+      studentAll.reverse();
+      console.log(studentAll)
+      if(studentAll.length>0){
+        this.$store.commit('setUserType','2')
+        this.$store.commit("setIsLoding", false);
+        }
+      let teacherAll =await this.$DBChain
+        .Querier(this.appCode)
+        .teacher.compareAll([
+          ["address", address],
+          ["status", "1"],
+        ])
+        .val();
+      console.log(teacherAll);
+      teacherAll.reverse();
+      if(teacherAll.length>0){
+        this.$store.commit('setUserType','1')
+        this.$store.commit("setIsLoding", false);
+        }
+      let adminAll =await this.$DBChain
+        .Querier(this.appCode)
+        .admin.compareAll([
+          ["address", address],
+          ["status", "1"],
+        ])
+        .val();
+      console.log(adminAll);
+      adminAll.reverse();
+      if(adminAll.length>0){
+        this.$store.commit('setUserType','0')
+        this.$store.commit("setIsLoding", false);
+        }
+        this.addData()
+    },
   },
-  store
+  computed: {
+    appCode() {
+      return this.$APIURL.AppCode;
+    },
+    ...mapState(["flag","menu",'userType'])
+  },
 }
 </script>
 
