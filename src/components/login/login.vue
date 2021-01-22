@@ -11,7 +11,18 @@
           label-width="80px"
           :model="ruleForm"
         >
-          <el-form-item
+        <el-form-item prop="mnemonic">
+          <el-select v-model="data" placeholder="请选择账号" @change='ruleForm.password=data.password;ruleForm.mnemonic=data.mnemonic'>
+              <el-option
+                v-for="item in options"
+                :key="item.mnemonic"
+                :label="item.name"
+                :value="item">
+              </el-option>
+            </el-select>
+          </el-form-item>
+        
+          <!-- <el-form-item
             class="_items"
             label="助记词"
             prop="mnemonic"
@@ -22,13 +33,15 @@
           </el-form-item>
           <el-form-item label="密码" prop="password" :rules="rules.password">
             <el-input v-model="ruleForm.password" type="password"></el-input>
-          </el-form-item>
+          </el-form-item> -->
           <div style="text-align: center">
             <el-button type="primary" @click="submitForm('ruleForm')"
               >立即登入</el-button
             >
           </div>
         </el-form>
+
+        <div>当前助记词：{{ruleForm.mnemonic}}</div>
       </el-card>
     </div>
   </div>
@@ -69,6 +82,7 @@ export default {
       }
     };
     return {
+      data:{},
       labelPosition: "right",
       ruleForm: {
         mnemonic: "",
@@ -83,6 +97,17 @@ export default {
           // { validator: validatePass, trigger: "blur" }
         ],
       },
+      options:[
+        {id:'',name:'管理员1',mnemonic:'bind dizzy trigger story senior session finger analyst text traffic scheme parent',password:'464454a'},
+        {id:'',name:'老师1',mnemonic:'citizen nice machine pioneer gossip lyrics tomato spray light food ethics throw',password:'464454a'},
+        {id:'',name:'老师2',mnemonic:'train brick gift solid galaxy planet detail seat barely hire lady render',password:'464454a'},
+        {id:'',name:'老师3',mnemonic:'sugar blossom truth power grace leaf core erode fat cube unfair write',password:'353343a'},
+        {id:'',name:'老师4',mnemonic:'spatial sort lesson reunion stage liquid shiver cup type topic kid teach',password:'464454a'},
+        {id:'',name:'学生1',mnemonic:'fuel lamp canal lazy barrel medal scheme coconut brass slender tackle satoshi',password:'464454a'},
+        {id:'',name:'学生2',mnemonic:'cross dirt blouse sheriff option system enemy anchor flight desk employ essay',password:'464454a'},
+        {id:'',name:'学生3',mnemonic:'cereal orient close profit else usual dizzy abandon rib doctor inner story',password:'464454a'},
+        {id:'',name:'学生4',mnemonic:'remember chicken impulse marine rose oak gate result cruise glad cup lazy',password:'464454a'},
+      ]
     };
   },
   created() {
