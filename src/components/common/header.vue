@@ -34,7 +34,6 @@
 </template>
 
 <script>
-import store from "@/vuex/store";
 import { mapState, mapMutations } from "vuex";
 export default {
   data() {
@@ -129,7 +128,7 @@ export default {
       }
     },
   },
-  store,
+
 };
 </script>
 

@@ -4,6 +4,7 @@ const CompressionWebpackPlugin = require('compression-webpack-plugin');
 
 // 是否为开发环境（生产环境或测试环境）
 const isProduction = process.env.NODE_ENV == 'production';
+console.log(isProduction)
 console.log(process.env.NODE_ENV);
 
 // 多线程执行
@@ -20,11 +21,11 @@ module.exports = {
 			// 全局css
 			sass: {
 				prependData: `@import "./src/assets/scss/_variable";`,
-			},
+			}
 
-		},
+		}
 	},
-	productionSourceMap: isProduction, //生产去除map
+	productionSourceMap: false, //生产去除map
 
 	configureWebpack: config => {
 
@@ -44,7 +45,7 @@ module.exports = {
 							// pure_funcs: [],
 						},
 					},
-					sourceMap: false,
+					// sourceMap: false,
 					parallel: isProduction,
 				}),
 				

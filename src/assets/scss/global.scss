@@ -13,10 +13,7 @@
   ._border_input_active {
     border-color: $active_color;
   }
-
-  
 }
-
 
 body,
 td,
@@ -26,7 +23,8 @@ th {
   color: #000000;
   font-weight: 300;
 }
-html,body{
+html,
+body {
   margin: 0;
   padding: 0;
   font-size: 16px;
@@ -114,31 +112,28 @@ html,body{
   }
 }
 
-._header_search ._flex 
-
-._block{
-  &:first-child{
-    ._sele{
-      &:first-child{
-        .el-input__inner{
+._header_search ._flex ._block {
+  &:first-child {
+    ._sele {
+      &:first-child {
+        .el-input__inner {
           padding: 0 24px 0 40px;
         }
-        ._rlt_text{
+        ._rlt_text {
           position: absolute;
           left: 7px;
           z-index: 2;
           font-size: 12px;
           top: 6px;
-          cursor: pointer;pointer-events: none;
+          cursor: pointer;
+          pointer-events: none;
           font-family: SourceHanSansCN-Normal, SourceHanSansCN;
           font-weight: 400;
           color: #000000;
         }
       }
-    
     }
   }
-  
 }
 
 // @font-face {

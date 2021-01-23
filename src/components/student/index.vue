@@ -30,10 +30,9 @@
 
 <script>
 import myFooter from "@/components/student/myFooter"
-import store from '@/vuex/store'
+
 import {mapState} from 'vuex'
 export default {
-  store,
   components: {
     "v-footer": myFooter
   },

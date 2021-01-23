@@ -252,12 +252,11 @@
 
 <script>
 let that;
-import store from "@/vuex/store";
+
 import { mapState } from "vuex";
 
 import {similar} from "@/utils/mUtils"
 export default {
-  store,
   data() {
     return {
       startTime: null, //考试开始时间
