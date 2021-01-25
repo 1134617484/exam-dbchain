@@ -7,7 +7,8 @@ export default new Router({
     {
       path: "/",
       name: "login", //登录界面
-      component: () => import("@/components/admin/index"),
+      
+      component: () => import("@/components/login/login"),
     },
     {
       path: "/login",

@@ -64,6 +64,7 @@ export default {
       this.login_flag = !this.login_flag;
     },
     async getRouter(address = this.$DBChain.getAddress()) {
+      if(!address)return this.$router.push('/login');
       this.$store.commit("setIsLoding", true);
       console.log(address);
       // 先在学生表中查看
