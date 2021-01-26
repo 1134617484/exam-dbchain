@@ -138,6 +138,7 @@
 <script>
 import { Querier } from "dbchain-js-client";
 import { ArrdeWeight } from "@/utils/mUtils";
+import {mapState} from 'vuex';
 export default {
   data() {
     return {
@@ -180,21 +181,6 @@ export default {
       this.dialogVisible = false;
       this.$store.commit("setIsLoding", true);
       this.insertRow(this.form, "恭喜您，修改操作已提交");
-      // this.$axios({
-      //   url: '/api/exam',
-      //   method: 'put',
-      //   data: {
-      //     ...this.form
-      //   }
-      // }).then(res => {
-      //   if(res.data.code == 200) {
-      //     this.$message({ //成功修改提示
-      //       message: '更新成功',
-      //       type: 'success'
-      //     })
-      //   }
-      //   this.getExamInfo()
-      // })
     },
     deleteRecord(row) {
       // 区块链中无删除的概念，因为上链的数据不可删除，故，此处删除等同于冻结，即，
@@ -255,10 +241,17 @@ export default {
       // 此页面用单独引入的方法做示例以便大家更容易的理解它
       console.log(this.appCode);
       // 先获取当前用户的地址
+      let data=[];
       let address = this.$DBChain.getAddress();
-      let data = await Querier(this.appCode)
+      if(this.userType=='0'){
+data = await Querier(this.appCode)
+        ["exam_manage"].val();
+      }else{
+        data = await Querier(this.appCode)
         ["exam_manage"].compareAll([["created_by", address]])
         .val();
+      }
+      
       console.log([...data]);
       data.reverse();
       data = ArrdeWeight(data, "paper_id");
@@ -271,10 +264,7 @@ export default {
       console.log(data);
       this.pagination.records = data;
       this.$forceUpdate();
-      // this.$axios(`${this.API}/api/exams/${this.pagination.current}/${this.pagination.size}`).then(res => {
-      //   this.pagination = res.data.data
-      // }).catch(error => {
-      // })
+     
     },
     //改变当前记录条数
     handleSizeChange(val) {
@@ -291,6 +281,7 @@ export default {
     appCode() {
       return this.$APIURL.AppCode;
     },
+    ...mapState(["userType"]),
   },
 };
 </script>

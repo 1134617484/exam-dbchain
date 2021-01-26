@@ -1,7 +1,7 @@
 // 教师管理页面
 <template>
   <div class="all">
-    <el-table :data="pagination.records" border>
+    <el-table :data="tableDataAll" border>
       <el-table-column fixed="left" prop="teacher_name" label="姓名" width="180"></el-table-column>
       <el-table-column prop="institute" label="学院" width="200"></el-table-column>
       <el-table-column prop="sex" label="性别" width="120">

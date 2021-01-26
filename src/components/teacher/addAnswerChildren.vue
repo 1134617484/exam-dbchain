@@ -542,38 +542,7 @@ export default {
       console.log(data);
 
       this.insertRow(data, "fill_question", "题库添加成功","2");
-      // this.$axios({
-      //   url: "/api/fillQuestion",
-      //   method: "post",
-      //   data: {
-      //     ...this.postFill,
-      //   },
-      // })
-      //   .then((res) => {
-      //     let status = res.data.code;
-      //     if (status == 200) {
-      //       this.$message({
-      //         message: "已添加到题库",
-      //         type: "success",
-      //       });
-      //       this.postFill = {};
-      //     }
-      //   })
-      //   .then(() => {
-      //     this.$axios(`${this.API}/api/fillQuestionId`).then((res) => {
-      //       //获取当前题目的questionId
-      //       let questionId = res.data.data.questionId;
-      //       this.postPaper.questionId = questionId;
-      //       this.postPaper.questionType = 2;
-      //       this.$axios({
-      //         url: "/api/paperManage",
-      //         method: "Post",
-      //         data: {
-      //           ...this.postPaper,
-      //         },
-      //       });
-      //     });
-      //   });
+
     },
     judgeSubmit() {
       //判断题提交
@@ -581,38 +550,7 @@ export default {
       let data = { ...this.postJudge, ...this.queryData,...{status:"3",type:"1"} };
       console.log(data);
       this.insertRow(data,'judge_question','添加至题库操作已提交',"3");
-      // this.$axios({
-      //   url: "/api/judgeQuestion",
-      //   method: "post",
-      //   data: {
-      //     ...this.postJudge,
-      //   },
-      // })
-      //   .then((res) => {
-      //     let status = res.data.code;
-      //     if (status == 200) {
-      //       this.$message({
-      //         message: "已添加到题库",
-      //         type: "success",
-      //       });
-      //       this.postJudge = {};
-      //     }
-      //   })
-      //   .then(() => {
-        //   this.$axios(`${this.API}/api/judgeQuestionId`).then((res) => {
-        //     //获取当前题目的questionId
-        //     let questionId = res.data.data.questionId;
-        //     this.postPaper.questionId = questionId;
-        //     this.postPaper.questionType = 3;
-        //     this.$axios({
-        //       url: "/api/paperManage",
-        //       method: "Post",
-        //       data: {
-        //         ...this.postPaper,
-        //       },
-        //     });
-        //   });
-        // });
+
     },
     /**
      * row 要插入的数据

@@ -132,14 +132,10 @@ export default {
       studentAll.reverse();
       studentAll = ArrdeWeight(studentAll, "address");
       console.log(studentAll);
-      // this.pagination.records=studentAll;
       this.tableDataAll = studentAll;
       this.pagination.total = studentAll.length;
       this.changeTablePage(this.pagination.current, this.pagination.size);
-      // this.$forceUpdate();
-      // this.$axios(`${this.API}/api/students/${this.pagination.current}/${this.pagination.size}`).then(res => {
-      //   this.pagination = res.data.data;
-      // }).catch(error => {});
+     
     },
     //改变当前记录条数
     handleSizeChange(val) {
@@ -157,9 +153,6 @@ export default {
       //修改学生信息
       this.dialogVisible = true;
       this.form = row;
-      // this.$axios(`${this.API}/api/student/${studentId}`).then(res => {
-      //   this.form = res.data.data
-      // })
     },
     deleteById(row) {
       let data={...row};
@@ -179,12 +172,7 @@ export default {
         .then(() => {
           //确认删除
           this.insertRow(data, "student", "学生删除成功");
-          // this.$axios({
-          //   url: `${this.API}/api/student/${studentId}`,
-          //   method: "delete",
-          // }).then((res) => {
-          //   this.getStudentInfo();
-          // });
+        
 
         })
         .catch(() => {});
@@ -195,22 +183,7 @@ export default {
       let data={...this.form,...{status:"1"}};
       console.log(data)
       this.insertRow(data, "student", "学生信息编辑成功");
-      // this.$axios({
-      //   url: "/api/student",
-      //   method: "put",
-      //   data: {
-      //     ...this.form,
-      //   },
-      // }).then((res) => {
-      //   console.log(res);
-      //   if (res.data.code == 200) {
-      //     this.$message({
-      //       message: "更新成功",
-      //       type: "success",
-      //     });
-      //   }
-      //   this.getStudentInfo();
-      // });
+     
     },
     handleClose(done) {
       //关闭提醒

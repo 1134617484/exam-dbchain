@@ -101,26 +101,6 @@ export default {
         this.$router.push({path: '/selectExam'})
       })
 
-      // canInsertRow  insertRow
-      
-      // this.$axios(`${this.API}/api/examManagePaperId`).then(res => {
-      //   this.form.paperId = res.data.data.paperId + 1 //实现paperId自增1
-      //   this.$axios({
-      //     url: '/api/exam',
-      //     method: 'post',
-      //     data: {
-      //       ...this.form
-      //     }
-      //   }).then(res => {
-      //     if(res.data.code == 200) {
-      //       this.$message({
-      //         message: '数据添加成功',
-      //         type: 'success'
-      //       })
-      //       this.$router.push({path: '/selectExam'})
-      //     }
-      //   })
-      // })
     },
     cancel() { //取消按钮
       this.form = {}

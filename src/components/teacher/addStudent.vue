@@ -66,20 +66,6 @@ export default {
     return {
       teacherAll: [],
       form: {
-        //表单数据初始化
-//         address: "cosmos15za2ksxwvh9jwhsh0rep2965fkc755epz5xfer",
-// card_id: "036e227ba9ea5f210bbd8cdf2512a01cf135a37b4332474727f04bee1b8b58506b",
-// clazz: "2班",
-// email: "fuel lamp canal lazy barrel medal scheme coconut brass slender tackle satoshi",
-// grade: "2025级",
-// institute: "罗斯福大学",
-// major: "罗斯福新政",
-// pwd: "464454a",
-// role: "2",
-// sex: "男",
-// student_name: "学生甲",
-// teacher_id: "2",
-// tel: "13100000000",
         student_name: null,
         grade: null,
         major: null,
@@ -103,21 +89,7 @@ export default {
       let data={...this.form,...{status:"1"}};
       console.log(data)
        this.insertRow(data, "student", "学生添加成功");
-      // this.$axios({
-      //   url: '/api/student',
-      //   method: 'post',
-      //   data: {
-      //     ...this.form
-      //   }
-      // }).then(res => {
-      //   if(res.data.code == 200) {
-      //     this.$message({
-      //       message: '数据添加成功',
-      //       type: 'success'
-      //     })
-      //     this.$router.push({path: '/studentManage'})
-      //   }
-      // })
+
     },
 
     /**

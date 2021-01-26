@@ -115,15 +115,7 @@ export default {
       this.tableDataAll = data;
       this.pagination.total = data.length;
       this.changeTablePage(this.pagination.current, this.pagination.size);
-      // this.$forceUpdate();
-      // this.$axios(
-      //   `${this.API}/api/answers/${this.pagination.current}/${this.pagination.size}`
-      // )
-      //   .then(res => {
-      //     this.pagination = res.data.data;
-      //     console.log(res);
-      //   })
-      //   .catch(error => {});
+      
     },
     //改变当前记录条数
     handleSizeChange(val) {
@@ -142,12 +134,6 @@ export default {
       row = this.pagination.size
     ) {
       console.log(page, row);
-      // let length = this.pagination.total;
-      // let numPage = Math.ceil(length / row);
-      // console.log(numPage);
-      // this.selected.page = Array.from(Array(numPage), (v, k) => k + 1);
-      // this.pagination.current>this.selected.page[this.selected.page.length-1]?this.search.page=this.selected.page[this.selected.page.length-1]:''
-      // page=this.search.page;
       this.pagination.records = [...this.tableDataAll].slice((page - 1)*row, page*row);
     },
 

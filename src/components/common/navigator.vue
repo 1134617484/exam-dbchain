@@ -22,11 +22,7 @@ export default {
   computed: mapState(["menu"]),
   methods: {
     getIndex() {
-      // this.bus.$on('sendIndex',(data)=>{
-      //   this.index1 = data
-      //   this.active = this.menu[data-1]
-      //   // console.log(JSON.stringify(this.active)+'----')
-      // })
+      
     }
   },
   created() {
